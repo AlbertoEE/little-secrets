@@ -60,6 +60,7 @@ export default function Home() {
         label="Select your player number"
         selectedKeys={playerNumber}
         selectionMode="single"
+        // @ts-ignore
         onSelectionChange={setPlayerNumber}
       >
         {["1", "2", "3", "4", "5", "6", "7", "8"].map((number) => (
@@ -70,6 +71,7 @@ export default function Home() {
         fullWidth
         color="primary"
         onPress={() =>
+          // @ts-ignore: Unreachable code error
           onLoadGame(numberOfPlayers.currentKey, playerNumber.currentKey - 1)
         }
       >
