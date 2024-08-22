@@ -1,16 +1,17 @@
 import seedrandom from "seedrandom";
 
-import { playerConfigurations, words } from "@/data/settings";
+import { playerConfigurations, Word, words } from "@/data/settings";
 
 export interface SeedAndWord {
   seed: string;
   word: string;
+  secretWords: Word;
 }
 
 export function generateWords(
   players: string,
   playerNumber: number,
-  seed?: string,
+  seed?: string
 ): SeedAndWord {
   const roles = [];
   const rolesReordenados = [];
@@ -23,7 +24,7 @@ export function generateWords(
   const rng = seedrandom(seed.toString());
 
   const configuration = playerConfigurations.find(
-    (conf) => conf.players === players,
+    (conf) => conf.players === players
   );
 
   for (let i = 0; i < parseInt(configuration!.disciples); i++) {
@@ -47,5 +48,6 @@ export function generateWords(
   return {
     seed: seed.toString(),
     word: result[playerNumber],
+    secretWords: wordPair,
   };
 }

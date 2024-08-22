@@ -5,12 +5,12 @@ import { useState } from "react";
 import { Input } from "@nextui-org/input";
 import { Button } from "@nextui-org/button";
 import { Divider } from "@nextui-org/divider";
-import { Card, CardBody, CardHeader } from "@nextui-org/card";
+import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
 import { SharedSelection } from "@nextui-org/system";
 import { Key } from "@react-types/shared";
 
 import { generateWords } from "@/shared/algorithms";
-import { playerConfigurations } from "@/data/settings";
+import { playerConfigurations, Word } from "@/data/settings";
 
 export default function Home() {
   const [numberOfPlayers, setNumberOfPlayers] = useState(() => {
@@ -24,13 +24,17 @@ export default function Home() {
   const [playerNumber, setPlayerNumber] = useState(new Set([]));
   const [seed, setSeed] = useState("");
   const [word, setWord] = useState("...");
+  const [secretWords, setSecretWords] = useState<Word>();
+  const [isSecretWordShown, setIsSecretWordShown] = useState(false);
 
   function onLoadGame(players: string, playerNumber: number) {
     if (seed === "") return;
 
-    const { word } = generateWords(players, playerNumber, seed);
+    const { word, secretWords } = generateWords(players, playerNumber, seed);
 
     setWord(word);
+    setSecretWords(secretWords);
+    setIsSecretWordShown(false);
   }
 
   return (
@@ -86,6 +90,30 @@ export default function Home() {
         <CardBody className="text-center">
           <div className="text-4xl font-extrabold py-10 italic">{word}</div>
         </CardBody>
+        <Divider />
+        <CardFooter className="flex justify-center">
+          {!isSecretWordShown && (
+            <Button
+              fullWidth
+              color="primary"
+              onPress={() => {
+                onLoadGame(numberOfPlayers.currentKey, 0);
+              }}
+            >
+              Show secret words
+            </Button>
+          )}
+          {isSecretWordShown && (
+            <div>
+              <div className="text-2xl font-extrabold py-5 italic text-green-600">
+                Disciple: {secretWords.disciple}
+              </div>
+              <div className="text-2xl font-extrabold py-5 italic text-red-600">
+                Impostor: {secretWords.impostor}
+              </div>
+            </div>
+          )}
+        </CardFooter>
       </Card>
     </section>
   );

@@ -1,17 +1,17 @@
-export interface word {
+export interface Word {
   disciple: string;
   impostor: string;
   periodist: string;
 }
 
-export interface playerConfiguration {
+export interface PlayerConfiguration {
   players: string;
   disciples: string;
   impostors: string;
   periodists: string;
 }
 
-export const words: word[] = [
+export const words: Word[] = [
   {
     disciple: "Piña",
     impostor: "Mango",
@@ -126,7 +126,8 @@ export const words: word[] = [
     disciple: "Medusa",
     impostor: "Pescado",
     periodist: "You are the Periodist",
-  },{
+  },
+  {
     disciple: "Sol",
     impostor: "Luna",
     periodist: "You are the Periodist",
@@ -230,7 +231,8 @@ export const words: word[] = [
     disciple: "Flor",
     impostor: "Rosa",
     periodist: "You are the Periodist",
-  },  {
+  },
+  {
     disciple: "León",
     impostor: "Tigre",
     periodist: "You are the Periodist",
@@ -334,7 +336,8 @@ export const words: word[] = [
     disciple: "Pincel",
     impostor: "Brocha",
     periodist: "You are the Periodist",
-  },  {
+  },
+  {
     disciple: "Guitarra",
     impostor: "Violín",
     periodist: "You are the Periodist",
@@ -441,7 +444,7 @@ export const words: word[] = [
   },
 ];
 
-export const playerConfigurations: playerConfiguration[] = [
+export const playerConfigurations: PlayerConfiguration[] = [
   {
     players: "4",
     disciples: "3",

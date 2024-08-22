@@ -7,10 +7,10 @@ import { Snippet } from "@nextui-org/snippet";
 import { SharedSelection } from "@nextui-org/system";
 import { Key } from "@react-types/shared";
 import { Divider } from "@nextui-org/divider";
-import { Card, CardHeader, CardBody } from "@nextui-org/card";
+import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 
-import { playerConfigurations } from "@/data/settings";
 import { generateWords } from "@/shared/algorithms";
+import { playerConfigurations, Word } from "@/data/settings";
 
 export default function Home() {
   const [numberOfPlayers, setNumberOfPlayers] = useState(() => {
@@ -23,12 +23,16 @@ export default function Home() {
   });
   const [word, setWord] = useState("");
   const [seed, setSeed] = useState("");
+  const [secretWords, setSecretWords] = useState<Word>();
+  const [isSecretWordShown, setIsSecretWordShown] = useState(false);
 
   function onLoadGame(players: string, playerNumber: number) {
-    const { seed, word } = generateWords(players, playerNumber);
+    const { seed, word, secretWords } = generateWords(players, playerNumber);
 
     setSeed(seed);
     setWord(word);
+    setSecretWords(secretWords);
+    setIsSecretWordShown(false);
   }
 
   return (
@@ -75,6 +79,30 @@ export default function Home() {
         <CardBody className="text-center">
           <div className="text-4xl font-extrabold py-10 italic">{word}</div>
         </CardBody>
+        <Divider />
+        <CardFooter className="flex justify-center">
+          {!isSecretWordShown && (
+            <Button
+              fullWidth
+              color="primary"
+              onPress={() => {
+                setIsSecretWordShown(true);
+              }}
+            >
+              Show secret words
+            </Button>
+          )}
+          {isSecretWordShown && (
+            <div>
+              <div className="text-2xl font-extrabold pt-10 italic text-green-600">
+                Disciple: {secretWords.disciple}
+              </div>
+              <div className="text-2xl font-extrabold pb-10 italic text-red-600">
+                Impostor: {secretWords.impostor}
+              </div>
+            </div>
+          )}
+        </CardFooter>
       </Card>
     </section>
   );
