@@ -1,7 +1,7 @@
 "use client";
 
 import { Select, SelectItem } from "@nextui-org/select";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@nextui-org/button";
 import { Snippet } from "@nextui-org/snippet";
 import { SharedSelection } from "@nextui-org/system";
@@ -11,6 +11,7 @@ import { Card, CardHeader, CardBody, CardFooter } from "@nextui-org/card";
 
 import { generateWords } from "@/shared/algorithms";
 import { playerConfigurations, Word } from "@/data/settings";
+import { P2PClient } from "@/shared/p2pclient";
 
 export default function Home() {
   const [numberOfPlayers, setNumberOfPlayers] = useState(() => {
@@ -26,6 +27,19 @@ export default function Home() {
   const [secretWords, setSecretWords] = useState<Word>();
   const [isSecretWordShown, setIsSecretWordShown] = useState(false);
 
+  const [p2pid, setP2pid] = useState("");
+  const [p2pclient, setP2pclient] = useState<P2PClient>(() => {
+    return new P2PClient();
+  });
+
+  useEffect(() => {
+    if (p2pclient) {
+      p2pclient.onOpen((id: string) => {
+        setP2pid(id);
+      });
+    }
+  }, [p2pclient]);
+
   function onLoadGame(players: string, playerNumber: number) {
     const { seed, word, secretWords } = generateWords(players, playerNumber);
 
@@ -33,6 +47,7 @@ export default function Home() {
     setWord(word);
     setSecretWords(secretWords);
     setIsSecretWordShown(false);
+    p2pclient.sendSeed(seed);
   }
 
   return (
@@ -60,7 +75,7 @@ export default function Home() {
       >
         <SelectItem key="1">{"1"}</SelectItem>
       </Select>
-      <Snippet className="w-full text-right">{seed}</Snippet>
+      <Snippet className="w-full text-right">{p2pid}</Snippet>
       <Button
         fullWidth
         color="primary"
@@ -68,7 +83,7 @@ export default function Home() {
           onLoadGame(numberOfPlayers.currentKey, 0);
         }}
       >
-        Generate
+        New Word
       </Button>
       <Divider />
       <Card fullWidth>
