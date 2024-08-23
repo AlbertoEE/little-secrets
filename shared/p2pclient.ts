@@ -5,6 +5,8 @@ export class P2PClient {
   id: string;
   connections: Map<string, DataConnection> = new Map();
   private onOpenFunction: (id: string) => void = (_) => {};
+  private onCloseFunction: () => void = () => {};
+  private onConnectedFunction: (conn: DataConnection) => void = (_) => {};
   private onNewWordFunction: (seed: string) => void = (_) => {};
 
   constructor() {
@@ -16,10 +18,21 @@ export class P2PClient {
       this.id = this.peer.id;
       this.onOpenFunction(id);
     });
+    this.peer.on('disconnected', () => {
+      this.onCloseFunction();
+    });
   }
 
   onOpen(fn: (id) => void) {
     this.onOpenFunction = fn;
+  }
+
+  onConnected(fn: (conn: DataConnection) => void) {
+    this.onConnectedFunction = fn;
+  }
+
+  onClose(fn: () => void) {
+    this.onCloseFunction = fn;
   }
 
   onNewWord(fn: (seed: string) => void) {
@@ -31,10 +44,8 @@ export class P2PClient {
       console.log("Sending seed to", peerId);
       conn.send({
         command: Command.NEW_WORD,
-        data: {
-          seed: seed,
-        },
-      } as CommandMessage);
+        seed: seed,
+      } as NewWordCommand);
     });
   }
 
@@ -46,10 +57,20 @@ export class P2PClient {
     this.onConnection(conn);
   }
 
+  close(peerId: string) {
+    console.log("Closing connection to", peerId)
+    let conn = this.connections.get(peerId);
+
+    if (conn) {
+      (conn as DataConnection).close();
+    }
+  }
+
   private onConnection(conn: DataConnection) {
     this.connections.set(conn.peer, conn);
     conn.on("open", () => {
       console.log("Connection open to ", conn.peer);
+      this.onConnectedFunction(conn);
 
       conn.on("data", (data) => {
         if (isCommandMessage(data)) {
@@ -63,13 +84,15 @@ export class P2PClient {
 
     conn.on("close", () => {
       console.log("Connection closed ", conn);
-      delete this.connections[conn.peer];
+      this.connections.delete(conn.peer);
+      this.onCloseFunction();
     });
   }
 
   private handleMessage(command: CommandMessage) {
     console.log("Received command message", command);
     if (isNewWordCommand(command)) {
+      console.log("Received new word command message", command);
       this.onNewWordFunction(command.seed);
     } else {
       console.error("Invalid command message", command);

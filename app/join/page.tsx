@@ -34,6 +34,7 @@ export default function Home() {
 
   const [hostId, setHostId] = useState("");
   const [p2pid, setP2pid] = useState("");
+  const [connected, setConnected] = useState(false);
   const [p2pclient, setP2pclient] = useState<P2PClient>(() => {
     return new P2PClient();
   });
@@ -43,7 +44,14 @@ export default function Home() {
       p2pclient.onOpen((id: string) => {
         setP2pid(id);
       });
+      p2pclient.onConnected((_) => {
+        setConnected(true);
+      });
+      p2pclient.onClose(() => {
+        setConnected(false);
+      });
       p2pclient.onNewWord((seed: string) => {
+        console.log("received seed ", seed)
         setSeed(seed);
       });
     }
@@ -63,6 +71,11 @@ export default function Home() {
     p2pclient.connectToHost(hostId);
   }
 
+  function onLeave() {
+    if (!hostId) return;
+    p2pclient.close(hostId);
+  }
+
   function onLoadGame(seed: string, players: string, playerNumber: number) {
     if (seed === "") return;
 
@@ -76,6 +89,7 @@ export default function Home() {
   return (
     <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10">
       <Input
+        isDisabled={connected}
         label="Enter Host Id"
         placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
         value={hostId}
@@ -83,6 +97,7 @@ export default function Home() {
       />
       <Select
         className="max-w"
+        isDisabled={connected}
         label="Select number of players"
         selectedKeys={numberOfPlayers}
         selectionMode="single"
@@ -97,6 +112,7 @@ export default function Home() {
       <Select
         className="max-w"
         disabledKeys={["1"]}
+        isDisabled={connected}
         label="Select your player number"
         selectedKeys={playerNumber}
         selectionMode="single"
@@ -107,50 +123,69 @@ export default function Home() {
           <SelectItem key={number}>{number}</SelectItem>
         ))}
       </Select>
-      <Button
-        fullWidth
-        color="primary"
-        onPress={() =>
-          // @ts-ignore: Unreachable code error
-          onJoin()
-        }
-      >
-        Join
-      </Button>
+      {!connected && (
+        <Button
+          fullWidth
+          color="primary"
+          isDisabled={
+            !hostId || !numberOfPlayers.currentKey || !playerNumber.currentKey
+          }
+          onPress={() =>
+            // @ts-ignore: Unreachable code error
+            onJoin()
+          }
+        >
+          Join
+        </Button>
+      )}
+      {connected && (
+        <Button
+          fullWidth
+          color="danger"
+          onPress={() =>
+            // @ts-ignore: Unreachable code error
+            onLeave()
+          }
+        >
+          Leave
+        </Button>
+      )}
       <Divider />
-      <Card fullWidth>
-        <CardHeader className="flex justify-center">
-          <div className="text-4xl">Your word is...</div>
-        </CardHeader>
-        <Divider />
-        <CardBody className="text-center">
-          <div className="text-4xl font-extrabold py-10 italic">{word}</div>
-        </CardBody>
-        <Divider />
-        <CardFooter className="flex justify-center">
-          {!isSecretWordShown && (
-            <Button
-              fullWidth
-              color="primary"
-              onPress={() => {
-                setIsSecretWordShown(true);
-              }}
-            >
-              Show secret words
-            </Button>
-          )}
-          {isSecretWordShown && (
-            <div>
-              <div className="text-2xl font-extrabold pt-10 italic text-green-600">
-                Disciple: {secretWords.disciple}
+      {connected && (
+        <Card fullWidth>
+          <CardHeader className="flex justify-center">
+            <div className="text-4xl">Your word is...</div>
+          </CardHeader>
+          <Divider />
+          <CardBody className="text-center">
+            <div className="text-4xl font-extrabold py-10 italic">{word}</div>
+          </CardBody>
+          <Divider />
+          <CardFooter className="flex justify-center">
+            {!isSecretWordShown && (
+              <Button
+                fullWidth
+                color="primary"
+                onPress={() => {
+                  setIsSecretWordShown(true);
+                }}
+              >
+                Show secret words
+              </Button>
+            )}
+            {isSecretWordShown && (
+              <div>
+                <div className="text-2xl font-extrabold pt-10 italic text-green-600">
+                  Disciple: {secretWords.disciple}
+                </div>
+                <div className="text-2xl font-extrabold pb-10 italic text-red-600">
+                  Impostor: {secretWords.impostor}
+                </div>
               </div>
-              <div className="text-2xl font-extrabold pb-10 italic text-red-600">
-                Impostor: {secretWords.impostor}
-              </div>
-            </div>
-          )}
-        </CardFooter>
-      </Card>
+            )}
+          </CardFooter>
+        </Card>
+      )}
     </section>
   );
 }
