@@ -7,7 +7,7 @@ export class P2PClient {
   private onOpenFunction: (id: string) => void = (_) => {};
   private onCloseFunction: () => void = () => {};
   private onConnectedFunction: (conn: DataConnection) => void = (_) => {};
-  private onNewWordFunction: (seed: string) => void = (_) => {};
+  private onNewWordFunction: (seed: string, numberOfPlayers: string) => void = () => {};
 
   constructor() {
     this.peer.on("connection", (conn) => {
@@ -35,16 +35,17 @@ export class P2PClient {
     this.onCloseFunction = fn;
   }
 
-  onNewWord(fn: (seed: string) => void) {
+  onNewWord(fn: (seed: string, numberOfPlayers: string) => void) {
     this.onNewWordFunction = fn;
   }
 
-  sendSeed(seed: string) {
+  sendNewWord(seed: string, numberOfPlayers: string) {
     this.connections.forEach((conn, peerId) => {
-      console.log("Sending seed to", peerId);
+      console.log("Sending new word to", peerId);
       conn.send({
         command: Command.NEW_WORD,
         seed: seed,
+        numberOfPlayers: numberOfPlayers,
       } as NewWordCommand);
     });
   }
@@ -93,7 +94,7 @@ export class P2PClient {
     console.log("Received command message", command);
     if (isNewWordCommand(command)) {
       console.log("Received new word command message", command);
-      this.onNewWordFunction(command.seed);
+      this.onNewWordFunction(command.seed, command.numberOfPlayers);
     } else {
       console.error("Invalid command message", command);
       // TODO properly handle errors
@@ -112,6 +113,7 @@ export interface CommandMessage {
 export interface NewWordCommand extends CommandMessage {
   command: Command.NEW_WORD;
   seed: string;
+  numberOfPlayers: string;
 }
 
 function isCommandMessage(object: any): object is CommandMessage {

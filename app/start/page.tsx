@@ -47,7 +47,7 @@ export default function Home() {
     setWord(word);
     setSecretWords(secretWords);
     setIsSecretWordShown(false);
-    p2pclient.sendSeed(seed);
+    p2pclient.sendNewWord(seed, numberOfPlayers.currentKey);
   }
 
   return (

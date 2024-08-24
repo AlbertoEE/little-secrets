@@ -14,16 +14,7 @@ import { playerConfigurations, Word } from "@/data/settings";
 import { P2PClient } from "@/shared/p2pclient";
 
 export default function Home() {
-  const [numberOfPlayers, setNumberOfPlayers] = useState<SharedSelection>(
-    () => {
-      const initialSelection = new Set<Key>(["4"]) as SharedSelection;
-
-      initialSelection.anchorKey = "4";
-      initialSelection.currentKey = "4";
-
-      return initialSelection;
-    },
-  );
+  const [numberOfPlayers, setNumberOfPlayers] = useState<string>();
   const [playerNumber, setPlayerNumber] = useState<SharedSelection>(
     new Set<Key>([]) as SharedSelection,
   );
@@ -50,20 +41,17 @@ export default function Home() {
       p2pclient.onClose(() => {
         setConnected(false);
       });
-      p2pclient.onNewWord((seed: string) => {
-        console.log("received seed ", seed)
+      p2pclient.onNewWord((seed: string, numberOfPlayers: string) => {
+        console.log("received seed ", seed, "and numberOfPlayers", numberOfPlayers);
         setSeed(seed);
+        setNumberOfPlayers(numberOfPlayers);
       });
     }
   }, [p2pclient]);
 
   useEffect(() => {
     if (!seed || !numberOfPlayers || !playerNumber) return;
-    onLoadGame(
-      seed,
-      numberOfPlayers.currentKey,
-      parseInt(playerNumber.currentKey) - 1,
-    );
+    onLoadGame(seed, numberOfPlayers, parseInt(playerNumber.currentKey) - 1);
   }, [seed, numberOfPlayers, playerNumber]);
 
   function onJoin() {
@@ -97,20 +85,6 @@ export default function Home() {
       />
       <Select
         className="max-w"
-        isDisabled={connected}
-        label="Select number of players"
-        selectedKeys={numberOfPlayers}
-        selectionMode="single"
-        onSelectionChange={setNumberOfPlayers}
-      >
-        {playerConfigurations.map((configuration) => (
-          <SelectItem key={configuration.players}>
-            {configuration.players}
-          </SelectItem>
-        ))}
-      </Select>
-      <Select
-        className="max-w"
         disabledKeys={["1"]}
         isDisabled={connected}
         label="Select your player number"
@@ -127,9 +101,7 @@ export default function Home() {
         <Button
           fullWidth
           color="primary"
-          isDisabled={
-            !hostId || !numberOfPlayers.currentKey || !playerNumber.currentKey
-          }
+          isDisabled={!hostId || !playerNumber.currentKey}
           onPress={() =>
             // @ts-ignore: Unreachable code error
             onJoin()
