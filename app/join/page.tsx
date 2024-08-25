@@ -97,7 +97,7 @@ export default function Home() {
               fullWidth
               color="primary"
               onPress={() => {
-                onLoadGame(numberOfPlayers.currentKey, 0);
+                setIsSecretWordShown(true);
               }}
             >
               Show secret words
@@ -105,10 +105,10 @@ export default function Home() {
           )}
           {isSecretWordShown && (
             <div>
-              <div className="text-2xl font-extrabold py-5 italic text-green-600">
+              <div className="text-2xl font-extrabold pt-10 italic text-green-600">
                 Disciple: {secretWords.disciple}
               </div>
-              <div className="text-2xl font-extrabold py-5 italic text-red-600">
+              <div className="text-2xl font-extrabold pb-10 italic text-red-600">
                 Impostor: {secretWords.impostor}
               </div>
             </div>
