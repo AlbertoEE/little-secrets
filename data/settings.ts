@@ -11,7 +11,7 @@ export interface PlayerConfiguration {
   periodists: string;
 }
 
-export const words: Word[] = [
+export const wordsSpa: Word[] = [
   {
     disciple: "Piña",
     impostor: "Mango",
@@ -440,6 +440,412 @@ export const words: Word[] = [
   {
     disciple: "Cuchara",
     impostor: "Cucharón",
+    periodist: "You are the Periodist",
+  },
+];
+
+export const words: Word[] = [
+  {
+    disciple: "Billie Eilish",
+    impostor: "Villain",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Harry Potter",
+    impostor: "Wizard",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Pizza",
+    impostor: "Italy",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Batman",
+    impostor: "Cave",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Netflix",
+    impostor: "Chill",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Elon Musk",
+    impostor: "Mars",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Google",
+    impostor: "Answers",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Spaghetti",
+    impostor: "Mess",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Ghost",
+    impostor: "Sheet",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Apple",
+    impostor: "Steve Jobs",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Joker",
+    impostor: "Laugh",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Sherlock",
+    impostor: "Clue",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Amazon",
+    impostor: "Delivery",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Zombie",
+    impostor: "Apocalypse",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Pikachu",
+    impostor: "Thunder",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Captain America",
+    impostor: "Shield",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Spotify",
+    impostor: "Playlist",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Twitch",
+    impostor: "Streamer",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "SpongeBob",
+    impostor: "Pineapple",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Fast Food",
+    impostor: "McDonald's",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Iceberg",
+    impostor: "Titanic",
+    periodist: "You are the Periodist",
+  }, {
+    disciple: "Mario",
+    impostor: "Plumber",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Shrek",
+    impostor: "Onion",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Taylor Swift",
+    impostor: "Breakup",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "TikTok",
+    impostor: "Dance",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Spider-Man",
+    impostor: "Web",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Voldemort",
+    impostor: "Nose",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "McDonald's",
+    impostor: "Clown",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Superman",
+    impostor: "Glasses",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Instagram",
+    impostor: "Filters",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Minecraft",
+    impostor: "Blocks",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "The Rock",
+    impostor: "Eyebrow",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Amazon",
+    impostor: "Boxes",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Scooby-Doo",
+    impostor: "Mystery",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Sonic",
+    impostor: "Rings",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Elvis Presley",
+    impostor: "Hair",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Netflix",
+    impostor: "Binge",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Tesla",
+    impostor: "Autopilot",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Monopoly",
+    impostor: "Bankrupt",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Guitar",
+    impostor: "Violin",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Ship",
+    impostor: "Submarine",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Lamp",
+    impostor: "Flashlight",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Hat",
+    impostor: "Helmet",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "King",
+    impostor: "Emperor",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Chocolate",
+    impostor: "Cocoa",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Horse",
+    impostor: "Mule",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Vase",
+    impostor: "Flowerpot",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Mountain",
+    impostor: "Canyon",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Truck",
+    impostor: "Trailer",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Newspaper",
+    impostor: "Magazine",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Stairs",
+    impostor: "Elevator",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Egg",
+    impostor: "Omelet",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Cow",
+    impostor: "Ox",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Table",
+    impostor: "Plank",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Keyboard",
+    impostor: "Piano",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Ice",
+    impostor: "Water",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Cinema",
+    impostor: "Theater",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Farm",
+    impostor: "Ranch",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Glasses",
+    impostor: "Lenses",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Spoon",
+    impostor: "Ladle",
+    periodist: "You are the Periodist",
+  }, {
+    disciple: "Guitar",
+    impostor: "Violin",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Ship",
+    impostor: "Submarine",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Lamp",
+    impostor: "Flashlight",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Hat",
+    impostor: "Helmet",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "King",
+    impostor: "Emperor",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Chocolate",
+    impostor: "Cocoa",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Horse",
+    impostor: "Mule",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Vase",
+    impostor: "Flowerpot",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Mountain",
+    impostor: "Canyon",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Truck",
+    impostor: "Trailer",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Newspaper",
+    impostor: "Magazine",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Stairs",
+    impostor: "Elevator",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Egg",
+    impostor: "Omelet",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Cow",
+    impostor: "Ox",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Table",
+    impostor: "Plank",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Keyboard",
+    impostor: "Piano",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Ice",
+    impostor: "Water",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Cinema",
+    impostor: "Theater",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Farm",
+    impostor: "Ranch",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Glasses",
+    impostor: "Lenses",
+    periodist: "You are the Periodist",
+  },
+  {
+    disciple: "Spoon",
+    impostor: "Ladle",
     periodist: "You are the Periodist",
   },
 ];
