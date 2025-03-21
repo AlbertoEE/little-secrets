@@ -1,12 +1,12 @@
 "use client";
 
-import { Select, SelectItem } from "@nextui-org/select";
+import { Select, SelectItem } from "@heroui/select";
 import { useState } from "react";
-import { Input } from "@nextui-org/input";
-import { Button } from "@nextui-org/button";
-import { Divider } from "@nextui-org/divider";
-import { Card, CardBody, CardFooter, CardHeader } from "@nextui-org/card";
-import { SharedSelection } from "@nextui-org/system";
+import { Input } from "@heroui/input";
+import { Button } from "@heroui/button";
+import { Divider } from "@heroui/divider";
+import { Card, CardBody, CardFooter, CardHeader } from "@heroui/card";
+import { SharedSelection } from "@heroui/system";
 import { Key } from "@react-types/shared";
 
 import { generateWords } from "@/shared/algorithms";
